@@ -1,0 +1,37 @@
+version: '3.7'
+
+
+services:
+  bot:
+    build: .
+    restart: always
+    volumes:
+      - .:/bot/cait
+    environment:
+      - PROXY_API_KEY=${PROXY_API_KEY}
+      - TG_BOT_TOKEN=${TG_BOT_TOKEN}
+      - TG_BOT_CHATS=${TG_BOT_CHATS}
+      - REDIS_PORT=${REDIS_PORT}
+      - REDIS_HOST=${REDIS_HOST}
+      - REDIS_PASSWORD=${REDIS_PASSWORD}
+    command: python -u main.py
+    env_file:
+      - .env
+    depends_on:
+      - redis-chat-history
+  
+  redis-chat-history:
+    image: redis:7.2.4-alpine
+    restart: always
+    command: --requirepass ${REDIS_PASSWORD}
+    environment:
+      - REDIS_HOST=${REDIS_HOST}
+      - REDIS_PASSWORD=${REDIS_PASSWORD}
+    ports:
+      - '6379:6379'
+    volumes:
+      - ./bot/redis-data/:/data
+    env_file:
+      - .env
+    
+

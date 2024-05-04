@@ -1,0 +1,6 @@
+**/__pycache__/
+.vscode
+.env
+Pipfile.lock
+.post.txt
+bot/

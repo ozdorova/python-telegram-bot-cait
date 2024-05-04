@@ -1,0 +1,6 @@
+openai
+pyTelegramBotAPI
+boto3
+redis 
+ipython 
+urllib3
