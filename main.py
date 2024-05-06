@@ -89,7 +89,7 @@ def get_ai_responce(message):
         return
 
     typing_process.terminate()
-    bot.reply_to(message, ai_response, parse_mode='MARKDOWN')
+    bot.reply_to(message, ai_response, parse_mode='markdown')
 
 
 def process_text_message(text, chat_id) -> str:
