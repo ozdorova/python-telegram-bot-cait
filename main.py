@@ -30,7 +30,7 @@ logger = telebot.logger
 telebot.logger.setLevel(logging.INFO)
 
 
-bot = telebot.TeleBot(TG_BOT_TOKEN, threaded=True, parse_mode='MARKDOWN')
+bot = telebot.TeleBot(TG_BOT_TOKEN, threaded=True)
 
 client = openai.Client(
     api_key=PROXY_API_KEY,
@@ -89,7 +89,7 @@ def get_ai_responce(message):
         return
 
     typing_process.terminate()
-    bot.reply_to(message, ai_response)
+    bot.reply_to(message, ai_response, parse_mode='MARKDOWN')
 
 
 def process_text_message(text, chat_id) -> str:
