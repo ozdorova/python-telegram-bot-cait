@@ -7,7 +7,9 @@ import time
 import multiprocessing
 import json
 import redis
+
 from threading import Thread
+from telebot.apihelper import ApiTelegramException
 
 
 TG_BOT_TOKEN = os.environ.get('TG_BOT_TOKEN')
@@ -87,8 +89,12 @@ def get_ai_responce(message):
         bot.reply_to(message, f'Произошла ошибка, попробуйте позже! {e}')
         return
 
-    bot.reply_to(message, ai_response, parse_mode='Markdown')
-    typing_process.terminate()
+    try:
+        bot.reply_to(message, ai_response, parse_mode='Markdown')
+    except ApiTelegramException:
+        bot.reply_to(message, ai_response)
+    finally:
+        typing_process.terminate()
 
 
 def process_text_message(text, chat_id) -> str:
