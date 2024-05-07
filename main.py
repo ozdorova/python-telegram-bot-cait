@@ -83,12 +83,11 @@ def get_ai_responce(message):
     try:
         text = message.text
         ai_response = process_text_message(text, message.chat.id)
-        print(text)
     except Exception as e:
         bot.reply_to(message, f'Произошла ошибка, попробуйте позже! {e}')
         return
 
-    bot.reply_to(message, ai_response, parse_mode='MarkdownV2')
+    bot.reply_to(message, ai_response, parse_mode='Markdown')
     typing_process.terminate()
 
 
