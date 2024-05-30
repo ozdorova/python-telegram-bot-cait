@@ -4,3 +4,7 @@
 Pipfile.lock
 .post.txt
 bot/
+.gitignore
+Pipfile
+Pipfile.lock
+tags
